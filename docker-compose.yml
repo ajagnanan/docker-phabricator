@@ -1,0 +1,21 @@
+mysql:
+    image: mysql/mysql-server
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+phabricator:
+    image: ajagnanan/docker-phabricator
+    ports:
+      - "2224:24"
+      - "80:80"
+      - "22280:22280"
+    links:
+      - mysql:mysql
+    volumes:
+      - sample:/config
+      - sample:/srv/repo
+    stdin_open: true
+    tty: true
+    restart: always

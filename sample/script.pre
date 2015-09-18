@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Set the name of the host running MySQL:
+./bin/config set mysql.host "$MYSQL_PORT_3306_TCP_ADDR"
+
+# If MySQL is running on a non-standard port:
+#./bin/config set mysql.port 3306
+
+# Set the username for connecting to MySQL:
+./bin/config set mysql.user "root"
+
+# Set the password for connecting to MySQL:
+./bin/config set mysql.pass "$MYSQL_ENV_MYSQL_ROOT_PASSWORD"
+
+# Set the base URI that will be used to access Phabricator. This needs to be the actual url of the server, otherwise it'll throw a site not found exception.
+./bin/config set phabricator.base-uri "http://192.168.99.100/"

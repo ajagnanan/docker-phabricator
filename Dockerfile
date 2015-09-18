@@ -91,4 +91,4 @@ RUN chmod u+s /usr/sbin/postdrop
 RUN chmod u+s /usr/sbin/postqueue
 
 # Set /init as the default
-CMD ["/init"]
+CMD ["/sbin/init"]

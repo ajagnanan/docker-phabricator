@@ -3,16 +3,15 @@
 
 This image configures a [Phabricator](http://phabricator.org) installation that runs within nginx. The install is configured
 using the `script.pre` file (example at `sample/script.pre`), which contains the settings that can be found in the
-[configuration documentation](https://secure.phabricator.com/book/phabricator/article/advanced_configuration/). Feel free to add
-more configuration settings in that file. Please be sure to mark this file as an executable.
+[configuration documentation](https://secure.phabricator.com/book/phabricator/article/advanced_configuration/). Feel free to add more configuration settings in that file. Please be sure to mark this file as an executable.
 
 ### To run this image:
 
   ```
-    docker run -p 22:22 -p 22280:22280 -p 80:80 -p 443:443 -v /path/to/config:/config -v /path/to/repo/storage:/srv/repo --name=phabricator ajagnanan/docker-phabricator
+    docker run -p 22:22 -p 22280:22280 -p 80:80 -p 443:443 -v /path/to/config:/config -v /path/to/repo/storage:/srv/repo     --name=phabricator ajagnanan/docker-phabricator
   ```
 
-A docker-compose file is included as an example and can also be used to run the container locally.
+A docker-compose file is included as an example and can be used to run the container locally.
 
   ```
     docker-compose up
@@ -37,7 +36,7 @@ detect the presence of the certificates and configure nginx to run with SSL enab
 
 ### Linking to a DB container
 
-If you are running MySQL in a Docker container (e.g. using the `mysql/mysql` container), you can configure the `script.pre` file like so to use the linked MariaDB container:
+If you are running MySQL in a Docker container (e.g. using the `mysql/mysql-server` container), you can configure the `script.pre` file like so to use the linked MariaDB container:
 
 ```
     ./bin/config set mysql.host "$LINKED_MYSQL_PORT_3306_TCP_ADDR"
@@ -46,16 +45,16 @@ If you are running MySQL in a Docker container (e.g. using the `mysql/mysql` con
 
 ### SSH / Login
 
-    ```
+```
     Username: root
     Password: linux
     Port: 24
-    ```
+```
 CVS repository hosting is done on port `22`.
 
 ### Extra information
 
   - Make sure you configure Phabricator to be backed by an external MySQL database.
-  - Map a directory from the host for repository storage. Containers are volatile unless using a tools like [Flocker](https://clusterhq.com)
+  - Map a directory from the host for repository storage. Containers are volatile unless using a tool like [Flocker](https://clusterhq.com)
 
 *** Image based on [hachque's phabricator configuration](https://github.com/hach-que-docker/phabricator) with some extra information.
